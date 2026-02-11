@@ -6,7 +6,7 @@ import { GlassCard } from "@/components/ui/glass-card";
 import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import { Button, Text } from "@gravity-ui/uikit";
-import { useNetworkStatus } from "@/hooks/use-network-status";
+
 
 export function Projects() {
   return (
@@ -26,7 +26,7 @@ export function Projects() {
            {projects.map((project, index) => (
              <GlassCard key={index} className="p-0 overflow-hidden flex flex-col h-full group" hoverEffect>
                 <div className="relative h-48 w-full bg-muted overflow-hidden">
-                  {project.video && !useNetworkStatus() ? (
+                  {project.video ? (
                     <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500">
                       <video
                         src={project.video}
