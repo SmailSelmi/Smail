@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #e87c2c;
+  --font-sans: var(--font-chillax), sans-serif;
+}
+
+:root {
+  --glass-bg: rgba(30, 30, 35, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 12px;
+
+  /* Gravity UI Brand Overrides */
+  --g-color-base-brand: #e87c2c;
+  --g-color-text-brand: #e87c2c;
+  --g-color-line-brand: #e87c2c;
+  --g-color-base-brand-hover: #d66d22;
+
+  /* Gravity UI Font Overrides */
+  --g-font-family-sans: var(--font-chillax), sans-serif;
+  --g-font-family-heading: var(--font-chillax), sans-serif;
+  --g-text-body-font-family: var(--font-chillax), sans-serif;
+  --g-text-header-font-family: var(--font-chillax), sans-serif;
+  --g-text-subheader-font-family: var(--font-chillax), sans-serif;
+  --g-text-display-font-family: var(--font-chillax), sans-serif;
+}
+
+body,
+button,
+input,
+textarea,
+select,
+.g-root {
+  background-color: #111112; /* Dark background */
+  color: #fff;
+  font-family: var(--font-chillax), sans-serif !important;
+}
+
+/* Force override for any disparate elements */
+* {
+  font-family: var(--font-chillax), sans-serif !important;
+}
+
+/* Custom Class for Glass Cards */
+.glass-card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Low Bandwidth Optimization */
+body.low-bandwidth .glass-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(20, 20, 25, 0.95) !important; /* Solid fallback */
+}
+
+/* Content Protection Styles */
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+/* Prevent image dragging globally */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none; /* Be careful with this if images have click actions */
+}
+
+/* Blur effect when window loses focus */
+body.blur-content > * {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
+  pointer-events: none;
+}
+
+/* Keep the protection overlay (if any) unblurred if needed, 
+   but blurring everything in body is usually sufficient */
+
