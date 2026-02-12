@@ -64,9 +64,11 @@ export function Contact() {
     try {
       const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "";
       const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "";
+      const notificationTemplateId =
+        process.env.NEXT_PUBLIC_EMAILJS_NOTIFICATION_TEMPLATE_ID || "";
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "";
 
-      if (!serviceId || !templateId || !publicKey) {
+      if (!serviceId || !templateId || !notificationTemplateId || !publicKey) {
         throw new Error("Missing EmailJS environment variables");
       }
 
@@ -77,32 +79,42 @@ export function Contact() {
         );
       }
 
-      if (form.current) {
-        // Run API and Animation in parallel
-        // We ensure the animation plays for at least 3 seconds/1 cycle
-        const animationPromise = new Promise((resolve) =>
-          setTimeout(resolve, 4500),
-        );
+      // Run API and Animation in parallel
+      // We ensure the animation plays for at least 4.5 seconds
+      const animationPromise = new Promise((resolve) =>
+        setTimeout(resolve, 4500),
+      );
 
-        let emailPromise;
+      const templateParams = {
+        from_name: values.from_name,
+        from_email: values.from_email,
+        phone_number: values.phone_number,
+        message: values.message,
+      };
 
-        try {
-          emailPromise = emailjs.sendForm(
-            serviceId,
-            templateId,
-            form.current,
-            publicKey,
-          );
-        } catch (error) {
-          // Immediate failure in setup
-          throw error;
-        }
+      // 1. Notification Email (To You)
+      const notificationPromise = emailjs.send(
+        serviceId,
+        notificationTemplateId,
+        templateParams,
+        publicKey,
+      );
 
-        // Wait for both. If email fails, it will throw and cancel the flow (handled in catch)
-        // Ideally we might want animation to finish even on error, but showing error state
-        // immediately is better for feedback if it fails.
-        // However, for "Immersion", we could use allSettled, but let's stick to robust feedback.
-        await Promise.all([emailPromise, animationPromise]);
+      // 2. Auto-Reply Email (To User)
+      const autoReplyPromise = emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicKey,
+      );
+
+      // Wait for ALL: Notification + Auto-Reply + Animation
+      // If ANY email fails, this will throw and jump to catch block
+      await Promise.all([
+        notificationPromise,
+        autoReplyPromise,
+        animationPromise,
+      ]);
 
         console.log(values);
         setStatus("success");
@@ -112,7 +124,7 @@ export function Contact() {
         setTimeout(() => {
           setStatus((prev) => (prev === "success" ? "idle" : prev));
         }, 5000);
-      }
+
     } catch (error: any) {
       console.error("EmailJS Error:", error);
       // Specific handling for common errors could go here
