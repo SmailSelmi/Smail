@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useSearchParams } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import emailjs from "@emailjs/browser";
+import { sendContactEmail } from "@/actions/send-email";
 import { NotificationSheet } from "@/components/ui/notification-sheet";
 
 const formSchema = z.object({
@@ -60,16 +60,6 @@ export function Contact() {
     setStatus("idle");
 
     try {
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "";
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "";
-      const notificationTemplateId =
-        process.env.NEXT_PUBLIC_EMAILJS_NOTIFICATION_TEMPLATE_ID || "";
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "";
-
-      if (!serviceId || !templateId || !notificationTemplateId || !publicKey) {
-        throw new Error("Missing EmailJS environment variables");
-      }
-
       // Offline Check
       if (!navigator.onLine) {
         throw new Error(
@@ -77,42 +67,29 @@ export function Contact() {
         );
       }
 
+      // Create FormData
+      const formData = new FormData();
+      formData.append("from_name", values.from_name);
+      formData.append("from_email", values.from_email);
+      formData.append("phone_number", values.phone_number);
+      formData.append("message", values.message);
+
       // Run API and Animation in parallel
       // We ensure the animation plays for at least 4.5 seconds
       const animationPromise = new Promise((resolve) =>
         setTimeout(resolve, 4500),
       );
 
-      const templateParams = {
-        from_name: values.from_name,
-        from_email: values.from_email,
-        phone_number: values.phone_number,
-        message: values.message,
-      };
+      const emailPromise = sendContactEmail(formData);
 
-      // 1. Notification Email (To You)
-      const notificationPromise = emailjs.send(
-        serviceId,
-        notificationTemplateId,
-        templateParams,
-        publicKey,
-      );
-
-      // 2. Auto-Reply Email (To User)
-      const autoReplyPromise = emailjs.send(
-        serviceId,
-        templateId,
-        templateParams,
-        publicKey,
-      );
-
-      // Wait for ALL: Notification + Auto-Reply + Animation
-      // If ANY email fails, this will throw and jump to catch block
-      await Promise.all([
-        notificationPromise,
-        autoReplyPromise,
+      const [emailResult] = await Promise.all([
+        emailPromise,
         animationPromise,
       ]);
+
+      if (!emailResult.success) {
+        throw new Error(emailResult.error || "Failed to send email");
+      }
 
       if (form.current) {
         console.log(values);
@@ -126,8 +103,8 @@ export function Contact() {
           }
         }, 5000);
       }
-    } catch (error: any) {
-      console.error("EmailJS Error:", error);
+    } catch (error: unknown) {
+      console.error("Email Error:", error);
       // Specific handling for common errors could go here
       if (form.current) {
         setStatus("error");

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Text } from "@gravity-ui/uikit";
 import { X, Terminal } from "lucide-react";
 
@@ -16,10 +16,13 @@ export function TerminalOverlay({ isOpen, onClose }: TerminalOverlayProps) {
   const fullText = "> SYSTEM BREACH DETECTED...\n> ANALYZING INPUT PATTERN...\n> PATTERN MATCH: KONAMI_PROTOCOL_V7\n> DECRYPTING...";
   
   // Reset state when opened
+  // Reset state when opened
   useEffect(() => {
     if (isOpen) {
-      setTextIndex(0);
-      setShowAccessGranted(false);
+      setTimeout(() => {
+        setTextIndex(0);
+        setShowAccessGranted(false);
+      }, 0);
     }
   }, [isOpen]);
 

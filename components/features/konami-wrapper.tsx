@@ -10,7 +10,7 @@ export function KonamiWrapper() {
 
   useEffect(() => {
     if (konamiSuccess) {
-      setIsOpen(true);
+      setTimeout(() => setIsOpen(true), 0);
     }
   }, [konamiSuccess]);
 

@@ -2,12 +2,25 @@
 
 import { useState, useEffect } from "react";
 
+interface NetworkInformation extends EventTarget {
+  saveData: boolean;
+  effectiveType: string;
+  onChange: EventListener;
+}
+
+interface NavigatorWithConnection extends Navigator {
+  connection?: NetworkInformation;
+  mozConnection?: NetworkInformation;
+  webkitConnection?: NetworkInformation;
+}
+
 export function useNetworkStatus() {
   const [isLowBandwidth, setIsLowBandwidth] = useState(false);
 
   useEffect(() => {
     // Check if navigator.connection is available
-    const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+    const nav = navigator as NavigatorWithConnection;
+    const connection = nav.connection || nav.mozConnection || nav.webkitConnection;
 
     if (connection) {
       const updateConnectionStatus = () => {

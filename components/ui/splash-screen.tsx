@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { KyodayLoader } from "@/components/ui/kyoday-loader";
 
-const hasShown = { value: false }; // Mutable object to persist across renders but reset on refresh
+
 
 export function SplashScreen() {
   const pathname = usePathname();
@@ -17,19 +17,21 @@ export function SplashScreen() {
     const hasVisited = sessionStorage.getItem("kyoday-visited");
     
     if (isHome && !hasVisited) {
-      setIsVisible(true);
+      // Use setTimeout to avoid synchronous state update warning
+      const showTimer = setTimeout(() => setIsVisible(true), 0);
       document.body.style.overflow = "hidden";
       
       // Mark as visited in session storage
       sessionStorage.setItem("kyoday-visited", "true");
 
-      const timer = setTimeout(() => {
+      const hideTimer = setTimeout(() => {
         setIsVisible(false);
         document.body.style.overflow = "auto";
       }, 2000);
 
       return () => {
-        clearTimeout(timer);
+        clearTimeout(showTimer);
+        clearTimeout(hideTimer);
         document.body.style.overflow = "auto";
       };
     }
