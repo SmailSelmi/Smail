@@ -23,7 +23,7 @@ export async function sendContactEmail(formData: FormData): Promise<{ success: b
     await Promise.all([
       // 1. Notification Email (To You)
       resend.emails.send({
-        from: "system@send.smailselmi.com",
+        from: "Portfolio System <system@smailselmi.com>",
         to: "smailselmi101@gmail.com",
         replyTo: email,
         subject: `New Lead: ${name}`,
@@ -32,7 +32,7 @@ export async function sendContactEmail(formData: FormData): Promise<{ success: b
 
       // 2. Auto-Reply Email (To User)
       resend.emails.send({
-        from: "contact@send.smailselmi.com",
+        from: "Smail Selmi <contact@smailselmi.com>",
         to: email,
         subject: "Message Received - Kyodai Code",
         html: autoReplyHtml,
