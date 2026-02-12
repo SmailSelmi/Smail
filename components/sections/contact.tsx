@@ -3,12 +3,10 @@
 import { motion } from "framer-motion";
 import { GlassCard } from "@/components/ui/glass-card";
 import { ContactButton } from "@/components/ui/contact-button";
-import { Button, Text, TextInput, TextArea } from "@gravity-ui/uikit";
+import { Text, TextInput, TextArea } from "@gravity-ui/uikit";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Mail } from "lucide-react";
-import { personalData } from "@/lib/data";
 import { useSearchParams } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
@@ -116,21 +114,28 @@ export function Contact() {
         animationPromise,
       ]);
 
+      if (form.current) {
         console.log(values);
         setStatus("success");
         reset();
 
         // Auto-close success message after 5 seconds
         setTimeout(() => {
-          setStatus((prev) => (prev === "success" ? "idle" : prev));
+          if (form.current) {
+            setStatus((prev) => (prev === "success" ? "idle" : prev));
+          }
         }, 5000);
-
+      }
     } catch (error: any) {
       console.error("EmailJS Error:", error);
       // Specific handling for common errors could go here
-      setStatus("error");
+      if (form.current) {
+        setStatus("error");
+      }
     } finally {
-      setIsSubmitting(false);
+      if (form.current) {
+        setIsSubmitting(false);
+      }
     }
   }
 
