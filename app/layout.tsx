@@ -7,6 +7,7 @@ import { ContentProtection } from "@/components/layout/content-protection"; // 5
 import { SplashScreen } from "@/components/ui/splash-screen"; // 6. Import Splash Screen
 import { KonamiWrapper } from "@/components/features/konami-wrapper"; // 7. Import Konami Code
 import { NetworkAware } from "@/components/layout/network-aware"; // 8. Network Optimization
+import { SpeedInsights } from "@vercel/speed-insights/next"; // 9. Speed Insights
 
 
 
@@ -100,6 +101,7 @@ export default function RootLayout({
         <NetworkAware />
         <ContentProtection />
         <Providers>{children}</Providers>
+        <SpeedInsights />
         <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-7QRB5ZRZDM"
