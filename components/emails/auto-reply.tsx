@@ -1,16 +1,15 @@
-
 import {
   Body,
   Button,
   Container,
   Head,
-  Heading,
+  Hr,
   Html,
-  Link,
   Preview,
   Section,
   Text,
   Tailwind,
+  Link,
 } from "@react-email/components";
 import * as React from "react";
 
@@ -19,58 +18,85 @@ interface AutoReplyEmailProps {
 }
 
 export const AutoReplyEmail = ({ name }: AutoReplyEmailProps) => {
+  const previewText = `Message received. Let's build something exceptional, ${name}.`;
+
   return (
     <Html>
-      <Head />
-      <Preview>I've got your message, {name}! ⚡</Preview>
       <Tailwind
         config={{
           theme: {
             extend: {
               colors: {
-                brand: "#E87C2C",
-                background: "#09090b",
-                surface: "#111113",
-                border: "#27272a",
+                background: "#e5e5e5", // User Specified Gray (Page BG)
+                surface: "#ffffff",    // User Specified White (Card BG)
+                border: "#d4d4d8",     // Zinc 300
+                primary: "#fca311",    // User Specified Orange
+                textMain: "#18181b",   // Zinc 900 (Black)
+                textMuted: "#71717a",  // Zinc 500 (Dark Gray)
               },
             },
           },
         }}
       >
-        <Body className="bg-background my-auto mx-auto font-sans text-white">
-          <Container className="border-t-4 border-t-brand border-x border-b border-border rounded-lg my-[40px] mx-auto p-[20px] max-w-[465px] bg-surface rounded-t-none">
-            <Section className="mt-[32px]">
-              <Heading className="text-white text-[24px] font-bold text-center p-0 my-[30px] mx-0">
-                I've got your message, <span className="text-brand">{name}</span>! ⚡
-              </Heading>
+        <Head />
+        <Preview>{previewText}</Preview>
+        <Body className="bg-background my-auto mx-auto font-sans">
+        <Container className="border border-solid border-border rounded-2xl my-[40px] mx-auto p-[40px] max-w-[480px] bg-surface shadow-sm">
+            
+            {/* Branding Header */}
+            <Section className="mt-[8px] mb-[32px]">
+              <div className="w-[40px] h-[4px] bg-primary mb-8 rounded-full"></div>
+              <Text className="text-textMuted text-[10px] font-bold tracking-[0.2em] uppercase m-0 leading-none">
+                Smail Selmi
+              </Text>
+              <Text className="text-textMain text-[28px] font-extrabold mt-[16px] mb-[8px] leading-[1.15] tracking-tight">
+                High-performance design is on the way.
+              </Text>
             </Section>
+            
+            {/* Main Message */}
+            <Text className="text-textMuted text-[16px] leading-[28px] my-0 mb-8 font-medium">
+              Hi <span className="text-textMain font-semibold">{name}</span>,
+              <br /><br />
+              Thanks for reaching out. Whether you're looking for a custom Next.js build or a complete UI/UX overhaul, you've come to the right place.
+              <br /><br />
+              I have received your project details and am currently reviewing them. You can expect a personal response from me within <span className="text-primary font-bold">24 hours</span>.
+            </Text>
 
-            <Section className="my-[32px] text-center">
-              <Text className="text-zinc-400 text-[16px] leading-[24px]">
-                Thanks for reaching out. I'll personally review your inquiry and get back to you within 24 hours.
+            {/* CTA Section - Distinct background for focus */}
+            <Section className="bg-[#fafafa] rounded-xl p-[32px] my-[40px] border border-solid border-border text-center">
+              <Text className="text-textMain text-[18px] font-bold m-0 mb-2">
+                Need a faster reply?
+              </Text>
+              <Text className="text-textMuted text-[14px] m-0 mb-6">
+                Skip the queue and chat directly.
+              </Text>
+              <Section>
+                <Button
+                  className="bg-primary rounded-lg text-white text-[16px] font-bold no-underline text-center px-8 py-4 inline-block shadow-md hover:bg-[#e8960f]"
+                  href="https://wa.me/213550365472"
+                >
+                  Chat on WhatsApp →
+                </Button>
+              </Section>
+              <Text className="mt-6 mb-0 text-[12px]">
+                <Link
+                  className="text-textMuted font-medium hover:text-textMain transition-colors underline decoration-border/50 underline-offset-4"
+                  href="https://instagram.com/0xsmail"
+                >
+                  View My Latest Work on Instagram
+                </Link>
               </Text>
             </Section>
 
-            <Section className="text-center mt-[32px] mb-[32px]">
-              <Button
-                className="bg-[#25D366] rounded-full text-white text-[14px] font-semibold no-underline text-center px-5 py-3 mx-2"
-                href="https://wa.me/213550365472"
-              >
-                WhatsApp
-              </Button>
-              <Button
-                className="bg-[#E1306C] rounded-full text-white text-[14px] font-semibold no-underline text-center px-5 py-3 mx-2"
-                href="https://instagram.com/0xsmail"
-              >
-                Instagram
-              </Button>
-            </Section>
-
-            <Section className="border-t border-border mt-[32px] pt-[32px] text-center">
-              <Text className="text-zinc-500 text-[14px]">
-                Smail Selmi — <span className="text-white font-semibold">Kyodai Code</span>
-              </Text>
-            </Section>
+            <Hr className="border-border my-[32px] w-full" />
+            
+            {/* Footer */}
+            <Text className="text-textMuted text-[12px] text-center leading-6 tracking-wide opacity-80">
+              © 2026 Smail Selmi. All rights reserved.<br />
+              UI/UX Designer & Front-end Developer.<br />
+              <Link href="https://smailselmi.com" className="text-textMuted underline decoration-border/50 underline-offset-2 hover:text-textMain">smailselmi.com</Link>
+            </Text>
           </Container>
         </Body>
       </Tailwind>
