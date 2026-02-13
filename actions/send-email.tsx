@@ -1,6 +1,7 @@
 "use server";
 
 import { Resend } from "resend";
+import { render } from "@react-email/render";
 import { ContactNotificationEmail } from "@/components/emails/contact-notification";
 import { AutoReplyEmail } from "@/components/emails/auto-reply";
 
@@ -18,6 +19,11 @@ export async function sendContactEmail(formData: FormData): Promise<{ success: b
 
   try {
     // Run in parallel
+    const [notificationHtml, autoReplyHtml] = await Promise.all([
+      render(<ContactNotificationEmail name={name} email={email} message={message} phone={phone} />),
+      render(<AutoReplyEmail name={name} />),
+    ]);
+
     await Promise.all([
       // 1. Notification Email (To You)
       resend.emails.send({
@@ -25,7 +31,7 @@ export async function sendContactEmail(formData: FormData): Promise<{ success: b
         to: "smailselmi101@gmail.com",
         replyTo: email,
         subject: `New Lead: ${name}`,
-        react: <ContactNotificationEmail name={name} email={email} message={message} phone={phone} />,
+        html: notificationHtml,
       }),
 
       // 2. Auto-Reply Email (To User)
@@ -33,7 +39,7 @@ export async function sendContactEmail(formData: FormData): Promise<{ success: b
         from: "Smail Selmi <contact@smailselmi.com>",
         to: email,
         subject: "Message Received - Kyodai Code",
-        react: <AutoReplyEmail name={name} />,
+        html: autoReplyHtml,
       }),
     ]);
 
