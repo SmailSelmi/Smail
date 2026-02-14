@@ -27,12 +27,12 @@ export const AutoReplyEmail = ({ name }: AutoReplyEmailProps) => {
           theme: {
             extend: {
               colors: {
-                background: "#e5e5e5", // User Specified Gray (Page BG)
+                background: "#f4f4f5", // Zinc 100
                 surface: "#ffffff",    // User Specified White (Card BG)
-                border: "#d4d4d8",     // Zinc 300
+                border: "#e4e4e7",     // Zinc 200
                 primary: "#fca311",    // User Specified Orange
                 textMain: "#18181b",   // Zinc 900 (Black)
-                textMuted: "#71717a",  // Zinc 500 (Dark Gray)
+                textMuted: "#52525b",  // Zinc 600
               },
             },
           },
@@ -41,21 +41,21 @@ export const AutoReplyEmail = ({ name }: AutoReplyEmailProps) => {
         <Head />
         <Preview>{previewText}</Preview>
         <Body className="bg-background my-auto mx-auto font-sans">
-        <Container className="border border-solid border-border rounded-2xl my-[40px] mx-auto p-[40px] max-w-[480px] bg-surface shadow-sm">
+        <Container className="border border-solid border-border rounded-2xl my-[40px] mx-auto p-[32px] max-w-[500px] bg-surface shadow-sm">
             
             {/* Branding Header */}
-            <Section className="mt-[8px] mb-[32px]">
+            <Section className="mt-[4px] mb-[28px]">
               <div className="w-[40px] h-[4px] bg-primary mb-8 rounded-full"></div>
               <Text className="text-textMuted text-[10px] font-bold tracking-[0.2em] uppercase m-0 leading-none">
                 Smail Selmi
               </Text>
-              <Text className="text-textMain text-[28px] font-extrabold mt-[16px] mb-[8px] leading-[1.15] tracking-tight">
+              <Text className="text-textMain text-[30px] font-extrabold mt-[16px] mb-[8px] leading-[1.1] tracking-tighter">
                 High-performance design is on the way.
               </Text>
             </Section>
             
             {/* Main Message */}
-            <Text className="text-textMuted text-[16px] leading-[28px] my-0 mb-8 font-medium">
+            <Text className="text-textMuted text-[16px] leading-[26px] my-0 mb-8 font-medium">
               Hi <span className="text-textMain font-semibold">{name}</span>,
               <br /><br />
               Thanks for reaching out. Whether you're looking for a custom Next.js build or a complete UI/UX overhaul, you've come to the right place.
@@ -64,7 +64,7 @@ export const AutoReplyEmail = ({ name }: AutoReplyEmailProps) => {
             </Text>
 
             {/* CTA Section - Distinct background for focus */}
-            <Section className="bg-[#fafafa] rounded-xl p-[32px] my-[40px] border border-solid border-border text-center">
+            <Section className="bg-[#fafafa] rounded-xl p-[24px] my-[32px] border border-solid border-border text-center">
               <Text className="text-textMain text-[18px] font-bold m-0 mb-2">
                 Need a faster reply?
               </Text>
@@ -73,7 +73,7 @@ export const AutoReplyEmail = ({ name }: AutoReplyEmailProps) => {
               </Text>
               <Section>
                 <Button
-                  className="bg-primary rounded-lg text-white text-[16px] font-bold no-underline text-center px-8 py-4 inline-block shadow-md hover:bg-[#e8960f]"
+                  className="bg-primary rounded-lg text-white text-[16px] font-bold no-underline text-center px-7 py-3.5 inline-block shadow-md hover:bg-[#e8960f]"
                   href="https://wa.me/213550365472"
                 >
                   Chat on WhatsApp →
