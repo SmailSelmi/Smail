@@ -12,16 +12,17 @@ export async function sendContactEmail(formData: FormData): Promise<{ success: b
   const email = formData.get("from_email") as string;
   const message = formData.get("message") as string;
   const phone = formData.get("phone_number") as string;
+  const project_type = formData.get("project_type") as string;
 
-  if (!name || !email || !message) {
+  if (!name || !email || !message || !project_type) {
     return { success: false, error: "Missing required fields" };
   }
 
   try {
     // Run in parallel
     const [notificationHtml, autoReplyHtml] = await Promise.all([
-      render(<ContactNotificationEmail name={name} email={email} message={message} phone={phone} />),
-      render(<AutoReplyEmail name={name} />),
+      render(<ContactNotificationEmail name={name} email={email} message={message} phone={phone} project_type={project_type} />),
+      render(<AutoReplyEmail name={name} project_type={project_type} />),
     ]);
 
     await Promise.all([

@@ -17,6 +17,7 @@ interface ContactNotificationProps {
   name: string;
   email: string;
   phone?: string;
+  project_type: string;
   message: string;
 }
 
@@ -24,6 +25,7 @@ export const ContactNotificationEmail = ({
   name,
   email,
   phone,
+  project_type,
   message,
 }: ContactNotificationProps) => (
   <Html>
@@ -91,6 +93,15 @@ export const ContactNotificationEmail = ({
                 </Column>
               </Row>
             )}
+
+            <Row className="border-b border-solid border-border bg-[#0a0a0a]">
+              <Column className="p-4 border-r border-solid border-border">
+                <Text className="text-textMuted text-[10px] uppercase m-0">Project Type</Text>
+              </Column>
+              <Column className="p-4">
+                 <Text className="text-accent text-[14px] font-bold uppercase m-0">{project_type}</Text>
+              </Column>
+            </Row>
           </Section>
 
           {/* Message Content */}

@@ -15,9 +15,10 @@ import * as React from "react";
 
 interface AutoReplyEmailProps {
   name: string;
+  project_type: string;
 }
 
-export const AutoReplyEmail = ({ name }: AutoReplyEmailProps) => {
+export const AutoReplyEmail = ({ name, project_type }: AutoReplyEmailProps) => {
   const previewText = `Message received. Let's build something exceptional, ${name}.`;
 
   return (
@@ -58,7 +59,7 @@ export const AutoReplyEmail = ({ name }: AutoReplyEmailProps) => {
             <Text className="text-textMuted text-[16px] leading-[26px] my-0 mb-8 font-medium">
               Hi <span className="text-textMain font-semibold">{name}</span>,
               <br /><br />
-              Thanks for reaching out. Whether you&apos;re looking for a custom Next.js build or a complete UI/UX overhaul, you&apos;ve come to the right place.
+              Thanks for reaching out regarding <span className="text-primary font-bold uppercase">{project_type}</span>. Whether you&apos;re looking for a custom Next.js build or a complete UI/UX overhaul, you&apos;ve come to the right place.
               <br /><br />
               I have received your project details and am currently reviewing them. You can expect a personal response from me within <span className="text-primary font-bold">24 hours</span>.
             </Text>

@@ -3,14 +3,15 @@
 import { motion } from "framer-motion";
 import { GlassCard } from "@/components/ui/glass-card";
 import { ContactButton } from "@/components/ui/contact-button";
-import { Text, TextInput, TextArea } from "@gravity-ui/uikit";
-import { useForm } from "react-hook-form";
+import { Text, TextInput, TextArea, Select } from "@gravity-ui/uikit";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useSearchParams } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { sendContactEmail } from "@/actions/send-email";
 import { NotificationSheet } from "@/components/ui/notification-sheet";
+import confetti from "canvas-confetti";
 
 const formSchema = z.object({
   from_name: z.string().min(2, "Name must be at least 2 characters"),
@@ -23,6 +24,7 @@ const formSchema = z.object({
       "Invalid number. Must start with 05, 06, or 07",
     ),
   message: z.string().min(10, "Message must be at least 10 characters"),
+  project_type: z.string().min(1, "Please select a project type"),
 });
 
 export function Contact() {
@@ -38,6 +40,7 @@ export function Contact() {
     formState: { errors },
     reset,
     setValue,
+    control,
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
@@ -73,6 +76,7 @@ export function Contact() {
       formData.append("from_email", values.from_email);
       formData.append("phone_number", values.phone_number);
       formData.append("message", values.message);
+      formData.append("project_type", values.project_type);
 
       // Run API and Animation in parallel
       // We ensure the animation plays for at least 4.5 seconds
@@ -94,6 +98,15 @@ export function Contact() {
       if (form.current) {
         console.log(values);
         setStatus("success");
+        
+        // Trigger Confetti
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#fca311", "#ffffff", "#18181b"]
+        });
+
         reset();
 
         // Auto-close success message after 5 seconds
@@ -229,6 +242,34 @@ export function Contact() {
                   {errors.phone_number && (
                     <Text color="danger" variant="caption-1">
                       {errors.phone_number.message}
+                    </Text>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Project Type</label>
+                  <Controller
+                    name="project_type"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        size="l"
+                        className="w-full"
+                        placeholder="Select what you need"
+                        value={field.value ? [field.value] : []}
+                        onUpdate={(value) => field.onChange(value[0])}
+                        options={[
+                          { value: "uiux", content: "UI/UX Design" },
+                          { value: "development", content: "Web Development" },
+                          { value: "branding", content: "Brand Identity" },
+                          { value: "other", content: "Other" },
+                        ]}
+                      />
+                    )}
+                  />
+                  {errors.project_type && (
+                    <Text color="danger" variant="caption-1">
+                      {errors.project_type.message}
                     </Text>
                   )}
                 </div>
