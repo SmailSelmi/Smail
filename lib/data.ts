@@ -51,7 +51,7 @@ export const projects = [
   {
     title: "E-Commerce Dashboard",
     description: "A comprehensive dashboard for managing products, orders, and analytics. Built with Next.js and Tailwind CSS.",
-    tags: ["Next.js", "React", "Tailwind CSS", "Recharts"],
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     link: "#",
     github: "#",
     image: "/1766174915141.jpg", // Placeholder for poster
@@ -60,7 +60,7 @@ export const projects = [
   {
     title: "Portfolio Website",
     description: "A modern, responsive portfolio website with smooth animations and dark mode support.",
-    tags: ["React", "Framer Motion", "Styled Components"],
+    tags: ["Next.js", "React", "JavaScript", "VS Code"],
     link: "#",
     github: "#",
     // image: Removed as no poster exists
@@ -69,7 +69,7 @@ export const projects = [
   {
     title: "Task Management App",
     description: "A collaborative task management tool with real-time updates and drag-and-drop functionality.",
-    tags: ["Vue.js", "Firebase", "Vuex"],
+    tags: ["HTML", "CSS", "TypeScript", "AI"],
     link: "#",
     github: "#",
     // image: Removed as no poster exists

@@ -72,7 +72,7 @@ export default function NotFound() {
       {/* Background Elements */}
       <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
         <h1 className="text-[20vw] font-bold leading-none select-none text-primary">
-          OFFLINE
+          BUILDING
         </h1>
       </div>
 
@@ -88,9 +88,12 @@ export default function NotFound() {
           
           {/* Header */}
           <div className="space-y-4">
-            <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter uppercase glitch-text">
-              System Offline
+            <h2 className="text-4xl md:text-7xl font-bold text-white tracking-tighter uppercase glitch-text">
+              Under Construction
             </h2>
+            <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto">
+              I'm still building this page to perfection. Check back soon for the full experience.
+            </p>
           </div>
 
           {/* Countdown */}
@@ -104,7 +107,7 @@ export default function NotFound() {
           {/* Status Bar */}
           <div className="max-w-md mx-auto w-full space-y-2">
             <p className={`text-xs text-primary/80 uppercase tracking-[0.2em] ${mono.className}`}>
-              System Initializing...
+              Refining user experience...
             </p>
             <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
                <motion.div
