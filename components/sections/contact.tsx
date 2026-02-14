@@ -43,6 +43,9 @@ export function Contact() {
     control,
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      message: "Hi Smail, I'm reaching out to discuss a potential project. I was impressed by your portfolio's focus on high-performance digital experiences and would love to explore a collaboration."
+    }
   });
 
   // Pre-fill message based on context
