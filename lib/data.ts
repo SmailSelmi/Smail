@@ -55,7 +55,7 @@ export const projects = [
     link: "#",
     github: "#",
     image: "/1766174915141.jpg", // Placeholder for poster
-    video: "/ecommerce-dashboard.mp4"
+    video: "https://res.cloudinary.com/dyi0jxi3g/video/upload/v1771061704/ecommerce-dashboard_lt3pqy.mp4"
   },
   {
     title: "Portfolio Website",
@@ -64,7 +64,7 @@ export const projects = [
     link: "#",
     github: "#",
     // image: Removed as no poster exists
-    video: "/landingpage.mp4"
+    video: "https://res.cloudinary.com/dyi0jxi3g/video/upload/v1771061700/landingpage_irhu4s.mp4"
   },
   {
     title: "Task Management App",
@@ -73,7 +73,7 @@ export const projects = [
     link: "#",
     github: "#",
     // image: Removed as no poster exists
-    video: "/Task-Management-App.mp4"
+    video: "https://res.cloudinary.com/dyi0jxi3g/video/upload/v1771061704/Task-Management-App_lp2sc8.mp4"
   },
 ];
 

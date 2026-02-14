@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { JetBrains_Mono } from "next/font/google";
 import { useEffect, useState } from "react";
+import { TerminalEasterEgg } from "@/components/ui/terminal-easter-egg";
 
 const mono = JetBrains_Mono({ subsets: ["latin"] });
 
@@ -124,6 +125,8 @@ export default function NotFound() {
           </div>
         </div>
       </motion.div>
+
+      <TerminalEasterEgg />
     </main>
   );
 }
