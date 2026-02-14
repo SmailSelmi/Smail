@@ -3,12 +3,21 @@
 import { motion } from "framer-motion";
 import { projects } from "@/lib/data";
 import { GlassCard } from "@/components/ui/glass-card";
-import { ExternalLink, Github } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { Button, Text } from "@gravity-ui/uikit";
-
+import { Text } from "@gravity-ui/uikit";
+import { useState } from "react";
+import { ProjectModal } from "@/components/ui/project-modal";
 
 export function Projects() {
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (project: typeof projects[0]) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
   return (
     <section id="projects" className="py-10 md:py-20 lg:py-24 relative">
       <div className="container px-6 md:px-12 lg:px-20">
@@ -24,105 +33,81 @@ export function Projects() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
            {projects.map((project, index) => (
-             <GlassCard key={index} className="p-0 overflow-hidden flex flex-col h-full group" hoverEffect>
-                <div className="relative h-48 w-full bg-muted overflow-hidden">
-                  {project.video ? (
-                    <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500">
-                      <video
-                        src={project.video}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        disablePictureInPicture
-                        controls={false}
-                        controlsList="nodownload nofullscreen noremoteplayback"
-                        className="w-full h-full object-cover pointer-events-none"
-                      />
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500" />
+             <motion.div
+               key={index}
+               layoutId={`project-${project.title}`}
+               className="h-full"
+             >
+              <GlassCard 
+                className="p-0 overflow-hidden flex flex-col h-full group cursor-pointer border border-white/5 hover:border-primary/30 transition-colors" 
+                hoverEffect
+                onClick={() => openModal(project)}
+              >
+                  <div className="relative h-56 w-full bg-muted overflow-hidden">
+                    {project.video ? (
+                      <div className="relative w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out">
+                        <video
+                          src={project.video}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          disablePictureInPicture
+                          controls={false}
+                          className="w-full h-full object-cover pointer-events-none"
+                        />
+                        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500" />
+                      </div>
+                    ) : project.image ? (
+                      <div className="relative w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500" />
+                      </div>
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 transition-transform duration-500" />
+                    )}
+                    
+                    {/* Hover Badge */}
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                       <div className="bg-primary px-4 py-2 rounded-full shadow-lg">
+                          <Text variant="caption-2" className="text-primary-contrast font-black uppercase tracking-widest">Case Study</Text>
+                       </div>
                     </div>
-                  ) : project.image ? (
-                    <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500" />
-                    </div>
-                  ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 group-hover:scale-105 transition-transform duration-500" />
-                  )}
-                  {!project.image && !project.video && (
-                    <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/50 font-bold text-lg">
-                      {project.title} Preview
-                    </div>
-                  )}
+                  </div>
+                
+                <div className="p-8 flex flex-col flex-grow">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.slice(0, 2).map(tag => (
+                      <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 font-bold uppercase tracking-wider">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <Text variant="header-2" className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors block leading-tight tracking-tight">{project.title}</Text>
+                  <Text variant="body-1" className="text-muted-foreground text-sm mb-6 flex-grow block leading-relaxed line-clamp-2">{project.description}</Text>
+                  
+                  <div className="flex items-center gap-2 text-primary font-bold text-sm group/btn">
+                    <span>Explore Case Study</span>
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </div>
                 </div>
-               
-               <div className="p-6 flex flex-col flex-grow">
-                 <Text variant="header-2" className="mb-2 group-hover:text-primary transition-colors block">{project.title}</Text>
-                 <Text variant="body-1" className="text-muted-foreground text-sm mb-4 flex-grow block leading-relaxed">{project.description}</Text>
-                 
-                 <div className="flex flex-wrap gap-2 mb-6">
-                   {project.tags.map(tag => (
-                     <span key={tag} className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 font-medium">
-                       {tag}
-                     </span>
-                   ))}
-                 </div>
-                 
-                 <div className="flex flex-col gap-3 mt-auto">
-                   <div className="flex items-center gap-3">
-                     <Button 
-                       view="outlined" 
-                       size="l" 
-                       width="max" 
-                       className="flex-1" 
-                       href="/404" 
-                       extraProps={{ 
-                         "aria-label": `View source code for ${project.title}`
-                       }}
-                     >
-                         <span className="flex items-center justify-center gap-2">
-                           <Github className="w-4 h-4" />
-                           <span>Code</span>
-                         </span>
-                      </Button>
-                      <Button 
-                        view="action" 
-                        size="l" 
-                        width="max" 
-                        className="flex-1" 
-                        href="/404" 
-                        extraProps={{ 
-                          "aria-label": `View live demo of ${project.title}`
-                        }}
-                      >
-                         <span className="flex items-center justify-center gap-2">
-                           <ExternalLink className="w-4 h-4" />
-                           <span>Live Demo</span>
-                         </span>
-                      </Button>
-                   </div>
-                   
-                   <Button
-                      view="flat"
-                      size="l"
-                      width="max"
-                      className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20"
-                      href={`/?ref=${encodeURIComponent(project.title)}#contact`}
-                    >
-                      <span className="font-bold tracking-wide">Hire Me for Similar Project</span>
-                    </Button>
-                 </div>
-               </div>
-             </GlassCard>
+              </GlassCard>
+             </motion.div>
            ))}
         </div>
       </div>
+
+      <ProjectModal 
+        project={selectedProject} 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </section>
   );
 }
