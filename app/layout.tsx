@@ -9,9 +9,11 @@ import { KonamiWrapper } from "@/components/features/konami-wrapper"; // 7. Impo
 import { NetworkAware } from "@/components/layout/network-aware"; // 8. Network Optimization
 import { SpeedInsights } from "@vercel/speed-insights/next"; // 9. Speed Insights
 import { Analytics } from "@vercel/analytics/next"; // 10. Analytics
-import { SmoothScroll } from "@/components/ui/smooth-scroll";
-import { CustomCursor } from "@/components/ui/custom-cursor";
-import { DynamicBackground } from "@/components/ui/dynamic-background";
+import dynamic from "next/dynamic";
+
+const SmoothScroll = dynamic(() => import("@/components/ui/smooth-scroll").then(mod => mod.SmoothScroll), { ssr: false });
+const CustomCursor = dynamic(() => import("@/components/ui/custom-cursor").then(mod => mod.CustomCursor), { ssr: false });
+const DynamicBackground = dynamic(() => import("@/components/ui/dynamic-background").then(mod => mod.DynamicBackground), { ssr: false });
 
 
 

@@ -36,7 +36,6 @@ export function CustomCursor() {
     };
   }, [mouseX, mouseY, isVisible]);
 
-  if (typeof window === "undefined") return null;
 
   return (
     <>
