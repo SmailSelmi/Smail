@@ -24,7 +24,7 @@ export function Skills() {
           </Text>
         </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 md:gap-8">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 md:gap-8">
           <GlassCard className="p-6">
             <Text variant="header-2" className="mb-4 text-primary block">UI/UX Design</Text>
             <ul className="space-y-2">
@@ -63,6 +63,15 @@ export function Skills() {
                   </span>
                 ))}
               </div>
+          </GlassCard>
+
+           <GlassCard className="p-6">
+             <Text variant="header-2" className="mb-4 text-primary block">Languages</Text>
+              <ul className="space-y-2">
+               {skills.languages.map((lang) => (
+                 <li key={lang} className="text-sm text-muted-foreground border-b border-border/50 pb-1 last:border-0">{lang}</li>
+               ))}
+             </ul>
           </GlassCard>
         </div>
       </div>

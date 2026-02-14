@@ -15,26 +15,28 @@ interface FAQItemProps {
 
 function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   return (
-    <div className="border-b border-border/10 last:border-none">
+    <div className="border-b border-white/5 hover:border-primary/20 transition-colors last:border-none group/item">
       <div
         role="button"
         tabIndex={0}
         onClick={onToggle}
         onKeyDown={(e) => e.key === "Enter" && onToggle()}
-        className="w-full py-6 flex items-center justify-between text-left group cursor-pointer bg-transparent"
+        className="w-full py-6 flex items-center justify-between text-left group/btn cursor-pointer bg-transparent"
       >
         <Text
-          variant="header-2"
-          className={`text-lg md:text-xl font-bold transition-all ${
-            isOpen ? "text-primary" : "text-foreground/80 group-hover:text-primary"
+          variant="header-1"
+          className={`font-black transition-all ${
+            isOpen ? "text-primary" : "text-foreground/80 group-hover/btn:text-primary"
           }`}
         >
           {question}
         </Text>
-        <div className={`p-2 rounded-full border border-border/50 transition-all ${
-           isOpen ? "bg-primary border-primary text-primary-contrast rotate-90" : "bg-transparent group-hover:bg-primary/10"
+        <div className={`p-2.5 rounded-xl border transition-all duration-300 ${
+           isOpen 
+           ? "bg-primary border-primary text-primary-contrast rotate-90 shadow-[0_0_20px_rgba(232,124,44,0.3)]" 
+           : "bg-primary/5 border-primary/20 group-hover/btn:bg-primary/20 group-hover/btn:border-primary/40 group-hover/btn:scale-110"
         }`}>
-          {isOpen ? <Minus size={20} /> : <Plus size={20} className="text-primary" />}
+          {isOpen ? <Minus size={18} /> : <Plus size={18} className="text-primary" />}
         </div>
       </div>
       <AnimatePresence>
@@ -47,7 +49,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
             className="overflow-hidden"
           >
             <div className="pb-8 pr-12">
-              <Text variant="body-2" className="text-muted-foreground leading-relaxed text-base md:text-lg">
+              <Text variant="body-2" className="text-muted-foreground leading-relaxed text-sm md:text-base">
                 {answer}
               </Text>
             </div>

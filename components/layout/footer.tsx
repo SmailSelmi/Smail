@@ -51,12 +51,12 @@ export function Footer() {
             
             {/* Column 1: Identity & Availability */}
             <div className="flex flex-col items-center md:items-start gap-3">
-               <div className="flex items-center gap-2 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full w-fit">
+               <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full w-fit">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <Text variant="caption-1" className="text-green-500 font-medium">Available for hire</Text>
+                <Text variant="caption-1" className="text-emerald-400 font-medium">Available for hire</Text>
               </div>
               <Text variant="header-2" className="text-xl font-bold tracking-tight">
                 {personalData.name}

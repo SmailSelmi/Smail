@@ -14,15 +14,24 @@ export const personalData = {
 
 export const education = [
   {
+    title: "Web Development & Programming",
+    institutions: [
+      { name: "Elzero Web School", link: "https://elzero.org/" },
+      { name: "Dr. Ramzi Khantouchi", link: "https://www.linkedin.com/in/rk101/" },
+    ],
+    year: "2021 - Present",
+  },
+  {
     title: "UI UX & Product Design",
-    institution: "Etudz Academy",
+    institution: "Dr. Ramzi Khantouchi",
     year: "2023 - Present",
-    link: "https://etudz.academy/",
+    link: "https://www.linkedin.com/in/rk101/",
   },
   {
     title: "High School",
     institution: "El Tarf Center",
     year: "2012 - 2016",
+    link: "https://www.de-eltaref.dz/ng4/#/user/login",
   },
 ];
 
@@ -40,6 +49,7 @@ export const experience = [
   {
     role: "Sales",
     company: "Cosmetic & Furniture Store",
+    link: "https://web.facebook.com/sabel.dour.1276/?_rdc=1&_rdr#",
     details: [
       { position: "Sales Manager", period: "Feb 2014 - Sep 2017" },
       { position: "Furniture Assembler & Installer", period: "Jun 2012 - Sep 2013" },
@@ -103,19 +113,34 @@ export const skills = {
   webDev: ["HTML", "CSS", "JavaScript", "Bootstrap", "WordPress", "Next.js", "React", "Tailwind CSS"],
   marketing: ["SEO", "Google Analytics", "Content Marketing", "E-commerce"],
   tools: ["Adobe Creative Suite", "Figma", "Canva", "VS Code", "AI", "Antigravity", "GitHub", "Notion", "WordPress"],
-  languages: ["Arabic (Native)", "English (Fluent)", "French (Elementary)"],
+  languages: ["Arabic — Native", "English — Professional", "French — Conversational"],
 };
 
 export const brands = [
+  { name: "HTML 5", icon: "html" },
+  { name: "CSS 3", icon: "css" },
+  { name: "JavaScript", icon: "javascript" },
+  { name: "Bootstrap", icon: "bootstrap" },
   { name: "Figma", icon: "figma" },
   { name: "Adobe", icon: "adobe" },
   { name: "Next.js", icon: "nextjs" },
-  { name: "React", icon: "react" },
-  { name: "Tailwind", icon: "tailwind" },
+  { name: "React Native", icon: "react" },
+  { name: "Tailwind CSS", icon: "tailwind" },
   { name: "TypeScript", icon: "typescript" },
   { name: "Node.js", icon: "nodejs" },
   { name: "GitHub", icon: "github" },
   { name: "VS Code", icon: "vscode" },
+  { name: "Gmail", icon: "gmail" },
+  { name: "OnePlus", icon: "oneplus" },
+  { name: "Notion", icon: "notion" },
+  { name: ".NET", icon: "dotnet" },
+  { name: "Git", icon: "git" },
+  { name: "Dell", icon: "dell" },
+  { name: "Google Chrome", icon: "chrome" },
+  { name: "Google Gemini", icon: "gemini" },
+  { name: "YouTube", icon: "youtube" },
+  { name: "Android", icon: "android" },
+  { name: "WordPress", icon: "wordpress" },
 ];
 
 export const faqItems = [

@@ -17,7 +17,7 @@ export function Experience() {
            className="text-center mb-8 md:mb-16"
         >
           <Text variant="display-2" className="mb-4 block">Experience & Education</Text>
-          <Text variant="body-2" className="text-muted-foreground block">My professional journey</Text>
+          <Text variant="body-2" className="text-muted-foreground block">A track record of dedication, growth, and continuous learning</Text>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
@@ -34,7 +34,18 @@ export function Experience() {
               {experience.map((job, index) => (
                 <GlassCard key={index} className="p-6 relative border-l-4 border-l-primary/50" hoverEffect>
                   <Text variant="header-2" className="font-bold block">{job.role}</Text>
-                  <Text variant="body-2" className="text-primary font-medium mb-4 block">{job.company}</Text>
+                  {job.link ? (
+                    <a 
+                      href={job.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-primary font-medium mb-4 block hover:underline underline-offset-4 w-fit"
+                    >
+                      {job.company}
+                    </a>
+                  ) : (
+                    <Text variant="body-2" className="text-primary font-medium mb-4 block">{job.company}</Text>
+                  )}
                   
                   <div className="space-y-3">
                     {job.details.map((detail, idx) => (
@@ -63,7 +74,36 @@ export function Experience() {
                {education.map((edu, index) => (
                 <GlassCard key={index} className="p-6 border-l-4 border-l-primary/50" hoverEffect>
                   <Text variant="header-2" className="font-bold block">{edu.title}</Text>
-                   <Text variant="body-2" className="text-primary font-medium block">{edu.institution}</Text>
+                   {"institutions" in edu && edu.institutions ? (
+                     <div className="flex items-center gap-2 flex-wrap">
+                       {edu.institutions.map((inst: { name: string; link: string }, idx: number) => (
+                         <span key={idx} className="flex items-center gap-2">
+                           <a
+                             href={inst.link}
+                             target="_blank"
+                             rel="noopener noreferrer"
+                             className="text-primary font-medium hover:underline underline-offset-4"
+                           >
+                             {inst.name}
+                           </a>
+                           {idx < edu.institutions.length - 1 && (
+                             <span className="text-white font-bold">|</span>
+                           )}
+                         </span>
+                       ))}
+                     </div>
+                   ) : edu.link ? (
+                     <a 
+                       href={edu.link} 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       className="text-primary font-medium block hover:underline underline-offset-4 w-fit"
+                     >
+                       {edu.institution}
+                     </a>
+                   ) : (
+                     <Text variant="body-2" className="text-primary font-medium block">{edu.institution}</Text>
+                   )}
                    <Text variant="caption-1" className="text-muted-foreground mt-2 block">{edu.year}</Text>
                 </GlassCard>
               ))}

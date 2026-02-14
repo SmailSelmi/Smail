@@ -30,7 +30,7 @@ export function About() {
           </GlassCard>
            <GlassCard className="text-center p-8" hoverEffect>
              <Text variant="display-2" className="text-primary mb-2 block">
-               <CountUp to={10} suffix="+" />
+               <CountUp to={15} suffix="+" />
              </Text>
              <Text variant="body-2" className="text-muted-foreground block">Projects Completed</Text>
           </GlassCard>

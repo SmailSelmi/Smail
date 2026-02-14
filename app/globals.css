@@ -109,3 +109,36 @@ body.blur-content > * {
 
 /* Keep the protection overlay (if any) unblurred if needed, 
    but blurring everything in body is usually sufficient */
+/* Custom Form Styling for Contact Section */
+#contact .yc-text-input,
+#contact .yc-select__control,
+#contact .yc-text-area {
+  height: 58px !important;
+  font-size: 16px !important;
+}
+
+#contact .yc-text-input__content {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+@media (min-width: 768px) {
+  #contact .yc-text-input,
+  #contact .yc-select__control,
+  #contact .yc-text-area {
+    height: 66px !important;
+    font-size: 18px !important;
+  }
+}
+
+/* Ensure textareas can still grow if needed but start larger */
+#contact .yc-text-area {
+  min-height: 140px !important;
+  height: auto !important;
+  padding-top: 14px !important;
+}
+
+/* Fix for Select height */
+#contact .yc-select {
+  height: auto !important;
+}

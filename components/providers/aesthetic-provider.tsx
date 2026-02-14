@@ -7,10 +7,6 @@ const SmoothScroll = dynamic(
   () => import("@/components/ui/smooth-scroll").then((mod) => mod.SmoothScroll),
   { ssr: false },
 );
-const CustomCursor = dynamic(
-  () => import("@/components/ui/custom-cursor").then((mod) => mod.CustomCursor),
-  { ssr: false },
-);
 const DynamicBackground = dynamic(
   () =>
     import("@/components/ui/dynamic-background").then(
@@ -23,7 +19,6 @@ export function AestheticProvider({ children }: { children: React.ReactNode }) {
   return (
     <>
       <SmoothScroll />
-      <CustomCursor />
       <DynamicBackground />
       {children}
     </>

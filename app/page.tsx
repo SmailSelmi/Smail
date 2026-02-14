@@ -3,7 +3,7 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
-import { InfiniteMarquee } from "@/components/ui/infinite-marquee";
+import { BrandMarquee } from "@/components/sections/brand-marquee";
 import { About } from "@/components/sections/about";
 import { Skills } from "@/components/sections/skills";
 import { Projects } from "@/components/sections/projects";
@@ -16,7 +16,7 @@ export default function Home() {
     <main className="min-h-screen bg-transparent text-foreground relative selection:bg-primary/20 selection:text-primary">
       <Header />
       <Hero />
-      <InfiniteMarquee />
+      <BrandMarquee />
       <About />
       <Skills />
       <Projects />

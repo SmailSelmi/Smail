@@ -28,7 +28,7 @@ export function Projects() {
            className="text-center mb-8 md:mb-16"
         >
           <Text variant="display-2" className="mb-4 block">Featured Deployments</Text>
-          <Text variant="body-2" className="text-muted-foreground block">Showcasing key initiatives and recent professional contributions</Text>
+          <Text variant="body-2" className="text-muted-foreground block">Real-world projects showcasing design thinking and technical execution</Text>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
