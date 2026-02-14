@@ -47,21 +47,9 @@ export function useProtection() {
     };
 
 
-    const handleWindowBlur = () => {
-       document.body.classList.add("blur-content");
-    };
-
-    const handleWindowFocus = () => {
-       document.body.classList.remove("blur-content");
-    };
-
-
     document.addEventListener("contextmenu", handleContextMenu);
     document.addEventListener("keydown", handleKeyDown);
     window.addEventListener("resize", detectDevTools);
-    // Use blur/focus for window switching specifically
-    // window.addEventListener("blur", handleWindowBlur);
-    // window.addEventListener("focus", handleWindowFocus);
 
     // Initial check
     detectDevTools();
@@ -70,8 +58,6 @@ export function useProtection() {
       document.removeEventListener("contextmenu", handleContextMenu);
       document.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("resize", detectDevTools);
-      // window.removeEventListener("blur", handleWindowBlur);
-      // window.removeEventListener("focus", handleWindowFocus);
       document.body.classList.remove("blur-content");
     };
   }, []);

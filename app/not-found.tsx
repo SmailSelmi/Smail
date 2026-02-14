@@ -8,6 +8,26 @@ import { useEffect, useState } from "react";
 
 const mono = JetBrains_Mono({ subsets: ["latin"] });
 
+const TimeUnit = ({ value, label }: { value: number; label: string }) => (
+  <div className="flex flex-col items-center">
+    <motion.div 
+      className={`text-4xl md:text-6xl font-bold text-primary ${mono.className} tabular-nums`}
+      animate={{ opacity: [1, 1, 0.5, 1, 0.8, 1] }}
+      transition={{ 
+        duration: 0.2, 
+        repeat: Infinity, 
+        repeatDelay: 5, // Fixed delay for purity and hydration stability
+        ease: "linear"
+      }}
+    >
+      {value.toString().padStart(2, "0")}
+    </motion.div>
+    <div className="text-xs md:text-sm text-white/40 uppercase tracking-widest mt-2">
+      {label}
+    </div>
+  </div>
+);
+
 export default function NotFound() {
   const router = useRouter();
   const [timeLeft, setTimeLeft] = useState({
@@ -40,33 +60,6 @@ export default function NotFound() {
     return () => clearInterval(interval);
   }, []);
 
-  const TimeUnit = ({ value, label }: { value: number; label: string }) => (
-    <div className="flex flex-col items-center">
-      <motion.div 
-        className={`text-4xl md:text-6xl font-bold text-primary ${mono.className} tabular-nums`}
-        animate={{ opacity: [1, 1, 0.5, 1, 0.8, 1] }}
-        transition={{ 
-          duration: 0.2, 
-          repeat: Infinity, 
-          repeatDelay: 3 + Math.random() * 5, // Random delay between glitches
-          ease: "linear"
-        }}
-        // Hydration note: Math.random here is okay because it only affects the *animation start/prop* 
-        // after mount if we use it in a way that doesn't mismatch server HTML. 
-        // Actually, props to motion components *can* cause mismatch if SRR renders one thing and client another.
-        // To be safe, let's use a fixed duration or set it in useEffect.
-        // Better: Use a fixed pattern or just a CSS class "animate-pulse" with custom speed.
-        // Let's use a robust Framer Motion prop:
-        // transition={{ duration: 2, times: [0, 0.95, 0.96, 0.98, 0.99, 1], repeat: Infinity }}
-      >
-        {value.toString().padStart(2, "0")}
-      </motion.div>
-      <div className="text-xs md:text-sm text-white/40 uppercase tracking-widest mt-2">
-        {label}
-      </div>
-    </div>
-  );
-
   return (
     <main className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
       {/* Background Elements */}
@@ -92,7 +85,7 @@ export default function NotFound() {
               Under Construction
             </h2>
             <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto">
-              I'm still building this page to perfection. Check back soon for the full experience.
+              I&apos;m still building this page to perfection. Check back soon for the full experience.
             </p>
           </div>
 

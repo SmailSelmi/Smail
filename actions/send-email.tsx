@@ -44,8 +44,9 @@ export async function sendContactEmail(formData: FormData): Promise<{ success: b
     ]);
 
     return { success: true };
-  } catch (error: any) {
+  } catch (error) {
     console.error("Resend Error:", error);
-    return { success: false, error: error.message || "Failed to send email" };
+    const errorMessage = error instanceof Error ? error.message : "Failed to send email";
+    return { success: false, error: errorMessage };
   }
 }
