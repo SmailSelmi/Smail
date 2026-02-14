@@ -9,6 +9,9 @@ import { KonamiWrapper } from "@/components/features/konami-wrapper"; // 7. Impo
 import { NetworkAware } from "@/components/layout/network-aware"; // 8. Network Optimization
 import { SpeedInsights } from "@vercel/speed-insights/next"; // 9. Speed Insights
 import { Analytics } from "@vercel/analytics/next"; // 10. Analytics
+import { SmoothScroll } from "@/components/ui/smooth-scroll";
+import { CustomCursor } from "@/components/ui/custom-cursor";
+import { DynamicBackground } from "@/components/ui/dynamic-background";
 
 
 
@@ -98,6 +101,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`g-root g-root_theme_dark ${chillax.variable} ${chillax.className} noselect`} suppressHydrationWarning>
         <SplashScreen />
+        <SmoothScroll />
+        <CustomCursor />
+        <DynamicBackground />
         <KonamiWrapper />
         <NetworkAware />
         <ContentProtection />
