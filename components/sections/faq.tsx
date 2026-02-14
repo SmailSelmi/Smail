@@ -16,9 +16,12 @@ interface FAQItemProps {
 function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   return (
     <div className="border-b border-border/10 last:border-none">
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         onClick={onToggle}
-        className="w-full py-6 flex items-center justify-between text-left group bg-transparent border-none outline-none cursor-pointer"
+        onKeyDown={(e) => e.key === "Enter" && onToggle()}
+        className="w-full py-6 flex items-center justify-between text-left group cursor-pointer bg-transparent"
       >
         <Text
           variant="header-2"
@@ -29,11 +32,11 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
           {question}
         </Text>
         <div className={`p-2 rounded-full border border-border/50 transition-all ${
-           isOpen ? "bg-primary border-primary text-primary-contrast rotate-90" : "bg-white/5 group-hover:bg-primary/10"
+           isOpen ? "bg-primary border-primary text-primary-contrast rotate-90" : "bg-transparent group-hover:bg-primary/10"
         }`}>
           {isOpen ? <Minus size={20} /> : <Plus size={20} className="text-primary" />}
         </div>
-      </button>
+      </div>
       <AnimatePresence>
         {isOpen && (
           <motion.div
